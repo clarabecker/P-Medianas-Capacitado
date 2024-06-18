@@ -1,12 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def criarFigura (largura, altura, num_pontos_x, num_pontos_y, path_image, num_totaldemanda):
+def criarFigura (largura, altura, num_pontos_x, num_pontos_y, path_image, num_totaldemanda, perc_p):
     fig, ax = plt.subplots()
     retangulo = plt.Rectangle((0, 0), largura, altura, edgecolor='black', facecolor='none')
     ax.add_patch(retangulo)
     aux_demanda = []
     demanda = []
+    p = int((num_pontos_x * num_pontos_y) * perc_p)
+
+    cap = int((num_totaldemanda/p) * 1.5)
 
     # Adicionar uma imagem de fundo ao retângulo
     img = plt.imread(path_image)
@@ -119,9 +122,8 @@ def criarFigura (largura, altura, num_pontos_x, num_pontos_y, path_image, num_to
             else:
                 demanda.append(val_baixademanda)
 
-
-    with open('instace.txt', 'w') as f:
-        f.write(str(num_pontos_x * num_pontos_y) + "\n")
+    with open('AAD_PMEDcap_'+ str(num_pontos_x * num_pontos_y) + '_' + str(p) +'.txt', 'w') as f:
+        f.write(str(num_pontos_x * num_pontos_y) + " " + str(p) + " " + str(cap) + "\n")
         for i in demanda:
             f.write(str(i) + " ")
         f.write("\n")
@@ -131,4 +133,4 @@ def criarFigura (largura, altura, num_pontos_x, num_pontos_y, path_image, num_to
 
 
 if __name__ == '__main__':
-    criarFigura(230, 190, 5, 5, 'C://Users//11835692974//Downloads//WhatsApp Image 2024-06-05 at 17.08.31.jpeg', 500)
+    criarFigura(230, 190, 12, 10, 'C://Users//02178611052//PMED_cap//image_map.jpeg', 500, 0.3)
