@@ -36,17 +36,13 @@ class Solution:
         if sum(self.y) == self.I.p:
             print('Error: trying to add more than p equipments!')
             exit(1)
-        #Modificado para não incluir mais de um equipamento por localização
-        #print("equipamento em localidade", location, self.y[location])
-        #if self.y[location] == 1:
-        #    print('Error: trying to add more than 1 equipments in location')
-        #    exit(1)
-        self.y[location] = 1 #acréscimo ao número de equipamentos
-        if location not in self.equipments: self.equipments.append(location) #verificação se o ponto não está presente nos pontos atendidos
-        #Moficado para = ao invés de +=
-        self.remaining_capacity[location] = self.I.cap #capacidade remanescente recebe capacidade
-        if self.x[location] != location and self.check_cover(location, location): #verifica se localização está sendo coberta e se ela mesmo está se cobrindo
-            self.cover(location, location)  #cobertura recebe o p que está cobrindo o outro ponto
+        if self.y[location] == 0:
+            self.y[location] = 1 #acréscimo ao número de equipamentos
+            if location not in self.equipments: self.equipments.append(location) #verificação se o ponto não está presente nos pontos atendidos
+            #Moficado para = ao invés de +=
+            self.remaining_capacity[location] = self.I.cap #capacidade remanescente recebe capacidade
+            if self.x[location] != location and self.check_cover(location, location): #verifica se localização está sendo coberta e se ela mesmo está se cobrindo
+                self.cover(location, location)  #cobertura recebe o p que está cobrindo o outro ponto
 
     #remove p da solução
     def remove_equipment(self, location):
@@ -83,7 +79,6 @@ class Solution:
             exit(1)
         location_covering = self.x[location_covered]
         self.remaining_capacity[location_covering] += self.I.dem[location_covered] #o ponto não está mais na cobertura, capacidade adiciona o valor da demanda daquele ponto
-        ##print(self.remaining_capacity)
         self.uncovered.append(location_covered)
         self.x[location_covered] = -1 #recebe -1 porque está sem equipamentos de novo
 

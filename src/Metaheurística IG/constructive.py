@@ -6,7 +6,7 @@ def random_solution(I, S = None):
     if S is None:
         S = Solution(I)
     for _ in range(I.p):
-        index = randint(0, I.N - 1)        
+        index = randint(0, I.N - 1)
         S.add_equipment(index)
     uncovered = S.uncovered.copy()
     shuffle(uncovered)
