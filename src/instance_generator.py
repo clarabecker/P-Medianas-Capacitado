@@ -123,14 +123,16 @@ def criarFigura (largura, altura, num_pontos_x, num_pontos_y, path_image, num_to
                 demanda.append(val_baixademanda)
 
     with open('AAD_PMEDcap_'+ str(num_pontos_x * num_pontos_y) + '_' + str(p) +'.txt', 'w') as f:
-        f.write(str(num_pontos_x * num_pontos_y) + " " + str(p) + " " + str(cap) + "\n")
+        f.write(str(num_pontos_x * num_pontos_y) + "\n")
+        f.write(str(p) + "\n")
+        f.write(str(cap) + "\n")
         for i in demanda:
             f.write(str(i) + " ")
         f.write("\n")
         for linha in range(len(distancias_manhattan)):
             for coluna in range(len(distancias_manhattan[linha])):
-                f.write(str(linha) + " " + str(coluna) + " " + str(distancias_manhattan[linha, coluna]) + "\n")
+                f.write(str(linha) + " " + str(coluna) + " " + str(int(distancias_manhattan[linha, coluna])) + "\n")
 
 
 if __name__ == '__main__':
-    criarFigura(230, 190, 12, 10, 'C://Users//02178611052//PMED_cap//image_map.jpeg', 500, 0.3)
+    criarFigura(230, 190, 5, 5, 'C://Users//02178611052//PMED_cap//image_map.jpeg', 500, 0.3)
