@@ -9,7 +9,7 @@ def criarFigura (largura, altura, num_pontos_x, num_pontos_y, path_image, num_to
     demanda = []
     p = int((num_pontos_x * num_pontos_y) * perc_p)
 
-    cap = int((num_totaldemanda/p) * 1.5)
+    cap = int((num_totaldemanda/p) * 1.7)
 
     # Adicionar uma imagem de fundo ao retângulo
     img = plt.imread(path_image)
@@ -135,4 +135,4 @@ def criarFigura (largura, altura, num_pontos_x, num_pontos_y, path_image, num_to
 
 
 if __name__ == '__main__':
-    criarFigura(230, 190, 5, 5, 'C://Users//02178611052//PMED_cap//image_map.jpeg', 500, 0.3)
+    criarFigura(230, 190, 10, 7, 'C:\\P-Medianas-Capacitado\\image_map.jpeg', 500, 0.3)

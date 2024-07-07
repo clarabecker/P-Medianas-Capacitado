@@ -3,10 +3,9 @@ from pyomo.environ import *
 def readInstance(path):
     instance = {}
     with open(path, "r") as f:
-        n, p, q= f.readline().strip().split()
-        n = int(n)
-        p = int(p)
-        q = int(q)
+        n = int(f.readline().strip())
+        p = int(f.readline().strip())
+        q = int(f.readline().strip())
 
         instance['n'] = n
         instance['m'] = n
@@ -59,7 +58,7 @@ def modelConstruction(instance):
     return model
 
 if __name__ == '__main__':
-    instance = readInstance("C://Users//11835692974//Desktop//instances//AAD_PMEDcap_n25_p5.txt")
+    instance = readInstance('C:\\P-Medianas-Capacitado\\src\\AAD_PMEDcap_70_21.txt')
     instancePrint(instance)
     model = modelConstruction(instance)
     result = SolverFactory('glpk').solve(model)
