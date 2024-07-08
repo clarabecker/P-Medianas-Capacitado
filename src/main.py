@@ -58,7 +58,7 @@ def modelConstruction(instance):
     return model
 
 if __name__ == '__main__':
-    instance = readInstance('C:\\P-Medianas-Capacitado\\src\\AAD_PMEDcap_70_21.txt')
+    instance = readInstance('C:\\P-Medianas-Capacitado\\src\\AAD_PMEDcap_25_5.txt')
     instancePrint(instance)
     model = modelConstruction(instance)
     result = SolverFactory('glpk').solve(model)

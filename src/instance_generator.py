@@ -135,4 +135,4 @@ def criarFigura (largura, altura, num_pontos_x, num_pontos_y, path_image, num_to
 
 
 if __name__ == '__main__':
-    criarFigura(230, 190, 10, 7, 'C:\\P-Medianas-Capacitado\\image_map.jpeg', 500, 0.3)
+    criarFigura(230, 190, 10, 10, 'C:\\P-Medianas-Capacitado\\image_map.jpeg', 500, 0.3)
