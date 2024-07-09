@@ -76,7 +76,7 @@ if __name__ == "__main__":
     required = parser.add_argument_group('required arguments')
     optional = parser.add_argument_group('optional arguments')
     required.add_argument('--instance', help = 'problem instance', metavar = '<file>', type=str, required = True)
-    optional.add_argument('--max_iterations', help = 'max. number of iterations of IG [100, 100000] (default: 1000)', metavar = '<m>', type = int, default = 100)
+    optional.add_argument('--max_iterations', help = 'max. number of iterations of IG [100, 100000] (default: 1000)', metavar = '<m>', type = int, default = 1000)
     optional.add_argument('--alpha', help = 'construction greediness for equipments [0, 1] (default: 0.3)', metavar = '<a>', type = float, default = 0.3)
     optional.add_argument('--beta', help = 'construction greediness for coverage [0, 1] (default: 0.2)', metavar = '<b>', type = float, default = 0.2)
     optional.add_argument('--d1', help = 'destruction size for equipments [0, 1] (default: 0.4)', metavar = '<d1>', type = float, default = 0.4)
