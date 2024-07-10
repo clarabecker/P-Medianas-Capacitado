@@ -88,3 +88,4 @@ if __name__ == "__main__":
     optional.add_argument('--acceptance', help = 'acceptance strategy {current, incumbent} (default: current)', metavar = '<acc>', type = str, default = 'current')
 
     args, other = parser.parse_known_args()
+    main()
