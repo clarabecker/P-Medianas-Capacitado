@@ -1,7 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from retangulo_demanda import RetanguloDemanda
-
+class RetanguloDemanda:
+    def __init__(self, x, y, altura, largura) -> None:
+        self.x = x
+        self.y = y
+        self.altura = altura
+        self.largura = largura
+        
 def criarFigura (largura, altura, num_pontos_x, num_pontos_y, path_image):
     fig, ax = plt.subplots()
     retangulo = plt.Rectangle((0, 0), largura, altura, edgecolor='black', facecolor='none')
