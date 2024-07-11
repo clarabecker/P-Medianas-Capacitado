@@ -1,4 +1,14 @@
-Resultado Iterated Greddy, alfa 0.3, beta 0.2, d1 0.4, d2 0.3, restart desativado, restart_percent 0.1, destruction guiada, 1000 iterações, ls ativado e acceptance current
+Resultado Iterated Greddy
+Alfa: 0.3
+Beta: 0.2
+D1: 0.4
+D2: 0.3
+Restart: Desativado
+Restart_percent: 0.1
+Destruction: Guiada
+Iterações: 1000
+LS: Ativado 
+Acceptance: Current
 
 Instance: AAD_PMEDcap_25_5.txt
 Equipments:	[0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1]
