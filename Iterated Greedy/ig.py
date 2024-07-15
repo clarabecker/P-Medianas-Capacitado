@@ -61,12 +61,18 @@ def iterated_greedy():
 
         S = accept(S_new, incumbent, S_value, incumbent_value)
 
-    print(incumbent)
+    def salvar_dados(incumbent):
+        with open('Results_AAD_PMEDcap.txt', 'w') as f:
+            f.write(f"{incumbent}\n")
+            f.write("\n")
 
+    print(incumbent)
+    salvar_dados(incumbent)
 
 def main():
     setup()
     iterated_greedy()
+
 
 
 if __name__ == "__main__":

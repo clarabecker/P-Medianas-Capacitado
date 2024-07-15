@@ -46,3 +46,4 @@ class Instance:
             self.distance[i][j] = dist
             self.distance[j][i] = dist
         file.close()
+
