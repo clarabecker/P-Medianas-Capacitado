@@ -5,7 +5,7 @@ from ls import local_search
 import random
 import argparse
 
-def setup():
+def setup(instance_path):
     global MAX_ITERATIONS, ALPHA, BETA, D1, D2, I, RESTART, RESTART_PERCENT, DESTRUCTION, LS, ACCEPTANCE
     MAX_ITERATIONS = args.max_iterations
     ALPHA = args.alpha
@@ -17,7 +17,7 @@ def setup():
     DESTRUCTION = args.destruction
     LS = args.ls
     ACCEPTANCE = args.acceptance
-    I = Instance(args.instance)
+    I = Instance(instance_path)
 
 
 def accept(S_new, incumbent, S_new_value, incumbent_value):
@@ -62,18 +62,23 @@ def iterated_greedy():
         S = accept(S_new, incumbent, S_value, incumbent_value)
 
     def salvar_dados(incumbent):
-        with open('Results_AAD_PMEDcap.txt', 'w') as f:
+        with open('Results_AAD_PMEDcap.txt', 'a') as f:
             f.write(f"{incumbent}\n")
             f.write("\n")
 
-    print(incumbent)
     salvar_dados(incumbent)
+    print(incumbent)
+
 
 def main():
-    setup()
-    iterated_greedy()
+    instance_paths = [
+        "C://P-Medianas-Capacitado//instances//AAD_PMEDcap_25_5.txt",
+        "C://P-Medianas-Capacitado//instances//AAD_PMEDcap_25_7.txt",
+    ]
 
-
+    for instance_path in instance_paths:
+        setup(instance_path)
+        iterated_greedy()
 
 if __name__ == "__main__":
     global args
