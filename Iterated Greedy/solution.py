@@ -93,7 +93,7 @@ class Solution:
         return total_dist
 
     def __str__(self):
-        result = f'Instance:\t[cap: {self.I.cap}, dem: {self.I.dem}]\n'
+        result = f'Instance:\t[n: {self.I.N}], [p: {self.I.p}]\n'
         result += f'Distância:\t[distance: {self.I.distance}]\n'
         result += f'Equipments:\t{self.y}\n'
         result += f'Coverage:\t{self.x}\n'
