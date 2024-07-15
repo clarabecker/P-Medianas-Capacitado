@@ -77,9 +77,11 @@ def main():
     ]
 
     for instance_path in instance_paths:
-        setup(instance_path)
-        iterated_greedy()
+        for i in range(10):
+            setup(instance_path)
+            iterated_greedy()
 
+            
 if __name__ == "__main__":
     global args
     parser = argparse.ArgumentParser()
