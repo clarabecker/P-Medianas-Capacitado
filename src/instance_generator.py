@@ -131,7 +131,7 @@ if __name__ == '__main__':
     p = int((num_pontos_x * num_pontos_y) * perc_p)
     cap = int((num_totaldemanda/p) * 1.7)
 
-    pontos_grid, alta_demanda1, alta_demanda2, media_demanda, distancias_manhattan = criarFigura(230, 190, num_pontos_x, num_pontos_y, 'C:\\P-Medianas-Capacitado\\image_map.jpeg')
+    pontos_grid, alta_demanda1, alta_demanda2, media_demanda, distancias_manhattan = criarFigura(230, 190, num_pontos_x, num_pontos_y, 'C:\\P-Medianas-Capacitado\\img\\image_map.jpeg')
     demanda = calcular_demanda(pontos_grid, alta_demanda1, alta_demanda2, media_demanda, num_totaldemanda)
     salvar_dados(num_pontos_x, num_pontos_y, p, cap, demanda, distancias_manhattan)
 
