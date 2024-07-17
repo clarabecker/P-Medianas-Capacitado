@@ -5,7 +5,7 @@ from ls import local_search, first_improvement
 import random
 import argparse
 
-def setup(instance_path):
+def setup():
     global MAX_ITERATIONS, ALPHA, BETA, D1, D2, I, RESTART, RESTART_PERCENT, DESTRUCTION, LS, ACCEPTANCE
     MAX_ITERATIONS = args.max_iterations
     ALPHA = args.alpha
@@ -17,13 +17,11 @@ def setup(instance_path):
     DESTRUCTION = args.destruction
     LS = args.ls
     ACCEPTANCE = args.acceptance
-    I = Instance(instance_path)
-
+    I = Instance(args.instance)
 
 def accept(S_new, incumbent, S_new_value, incumbent_value):
     if   ACCEPTANCE == 'incumbent': return incumbent
     elif ACCEPTANCE ==   'current': return S_new
-
 
 def iterated_greedy():
     S = random_solution(I)
@@ -58,25 +56,10 @@ def iterated_greedy():
             no_improving_iterations = 0
 
         S = accept(S_new, incumbent, S_value, incumbent_value)
-
-    def salvar_dados(incumbent):
-        with open('Results_AAD_PMEDcap.txt', 'a') as f:
-            f.write(f"{incumbent}\n")
-            f.write("\n")
-
-    salvar_dados(incumbent)
     print(incumbent)
-
-
-def main(instance_path):
-    for _ in range (1000):
-        I = Instance(instance_path)
-        S = random_solution(I)
-        S = first_improvement(S)
-        if len(S.equipments) != 5:
-            print(len(S.equipments))
-    print(S)
-
+def main():
+    setup()
+    iterated_greedy()
 
 if __name__ == "__main__":
     global args
@@ -97,4 +80,4 @@ if __name__ == "__main__":
     optional.add_argument('--acceptance', help = 'acceptance strategy {current, incumbent} (default: current)', metavar = '<acc>', type = str, default = 'incumbent')
 
     args, other = parser.parse_known_args()
-    main(args.instance)
+    main()
