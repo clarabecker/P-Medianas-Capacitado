@@ -5,9 +5,11 @@ from math import ceil
 def random_solution(I, S = None):
     if S is None:
         S = Solution(I)
-    for _ in range(I.p):
+    count = 0
+    while (count < I.p):
         index = randint(0, I.N - 1)
-        S.add_equipment(index)
+        if S.add_equipment(index):
+            count = count + 1
     uncovered = S.uncovered.copy()
     shuffle(uncovered)
     for loc in uncovered:
@@ -61,8 +63,8 @@ def construction(I, S = None, alpha = 0.5, beta = 0.5):
 
     while n_equip > 0:
         location = select_location(I, S, alpha)
-        S.add_equipment(location)
-        n_equip -= 1
+        if S.add_equipment(location):
+            n_equip -= 1
 
         locations_to_cover = select_locations_to_cover(I, S, location, beta)
         for location_to_cover in locations_to_cover:

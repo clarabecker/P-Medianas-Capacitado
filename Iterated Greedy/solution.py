@@ -24,8 +24,8 @@ class Solution:
 
         #se a solução for vazia
         else:
-            self.x = [-1] * I.N #recebe -1 pq nenhuma localização cobre i
-            self.y = [0] * I.N #recebe 0 porque nenhum equipamento está instalado
+            self.x = [-1] * I.N
+            self.y = [0] * I.N
             self.uncovered = [_ for _ in range(self.I.N)] #todas as localidades não são cobertas inicialmente
             self.equipments = []
             self.remaining_capacity = [0 for _ in range(self.I.N)]  #todos tem capacidade restante 0
@@ -43,6 +43,12 @@ class Solution:
             self.remaining_capacity[location] = self.I.cap #capacidade remanescente recebe capacidade
             if self.x[location] != location and self.check_cover(location, location): #verifica se localização está sendo coberta e se ela mesmo está se cobrindo
                 self.cover(location, location)  #cobertura recebe o p que está cobrindo o outro ponto
+            return True
+        return False
+
+    #Verifica se dada localização já possui equipamento
+    def check_loc(self, location):
+        return self.y[location] == 0
 
     #remove p da solução
     def remove_equipment(self, location):

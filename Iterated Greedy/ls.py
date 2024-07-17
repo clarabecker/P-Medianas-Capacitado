@@ -21,14 +21,14 @@ def first_improvement(S):
         neighbor.remove_equipment(location)
 
         for loc in range(neighbor.I.N):
-            neighbor.add_equipment(loc)
-            neighbor = cover_locations(neighbor)
-            if neighbor.complete_obj() < value:
-                return neighbor
-            else:
-                neighbor = Solution(S.I, S)
-                neighbor.remove_equipment(location)
-
+            if neighbor.check_loc(loc):
+                neighbor.add_equipment(loc)
+                neighbor = cover_locations(neighbor)
+                if neighbor.complete_obj() < value and len(neighbor.equipments) == neighbor.I.p:
+                    return neighbor
+                else:
+                    neighbor = Solution(S.I, S)
+                    neighbor.remove_equipment(location)
     return None
 
 
