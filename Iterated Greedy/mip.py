@@ -1,89 +1,72 @@
 from pyomo.environ import *
-from instance import Instance
-import sys
 
-def solution(I, model):
-    print('Equipments: ', end='')
-    for i in range(I.N):
-        if model.y[i]() > 0: print(f'{i}({model.y[i]()}) ', end='')
-    print()
-    print('Uncovered cities: ', end='')
-    for j in range(I.N):
-        covered = False
-        for i in range(I.N):
-            if model.x[i,j]() == 1:
-                covered = True
-                break
-        if not covered:
-            print(f'{j} ')
-    print()
-    print('Coverage:')
-    for i in range(I.N):
-        for j in range(I.N):
-            if model.x[i,j]() == 1:
-                print(f'{i} attending {j}')
+def readInstance(path):
+    instance = {}
+    with open(path, "r") as f:
+        n = int(f.readline().strip())
+        p = int(f.readline().strip())
+        q = int(f.readline().strip())
 
+        instance['n'] = n
+        instance['m'] = n
+        instance['p'] = p
+        instance['q'] = q
+        instance['dem'] = []
+        instance['d'] = [[0] * n for _ in range(n)]
 
-def number_uncovered(I, model):
-    result = 0
-    for j in range(I.N):
-        covered = False
-        for i in range(I.N):
-            if model.x[i,j]() == 1:
-                covered = True
-                break
-        if not covered:
-            result +=1
-    return result
+        instance['dem'].extend(map(float, f.readline().split()))
 
+        for _ in range(n*n):
+            linha = f.readline().strip().split()
+            instance['d'][int(linha[0])][int(linha[1])] = float(linha[2])
 
-def formulation(I):
+    return instance
+
+def instancePrint(instance):
+    print(instance['n'])
+    print(instance['m'])
+    print(instance['p'])
+    print(instance['q'])
+    print(instance['dem'])
+    print(instance['d'])
+
+def modelConstruction(instance):
     model = ConcreteModel()
 
-    model.x = Var([_ for _ in range(I.N)], [_ for _ in range(I.N)], domain = Binary)
-    model.y = Var([_ for _ in range(I.N)], domain = NonNegativeIntegers)
-    model.M = Var(domain = NonNegativeIntegers)
+    #Variáveis de decisão
+    model.x = Var(range(instance['n']), domain=Binary)
+    model.y = Var(range(instance['m']), range(instance['n']), domain=Binary)
 
-    model.obj = Objective(
-        expr = sum(I.distance[i][j] * model.x[i,j] for i in range(I.N) for j in range(I.N)) + model.M * I.penalty, sense = minimize
-    )
+    # Função objetivo
+    model.obj = Objective(expr=sum(instance['d'][i][j] * model.y[i, j] for i in range(instance['m']) for j in range(instance['n'])), sense=minimize)
 
-    model.cons = ConstraintList()
+    # Restrições
+    model.con1 = Constraint(expr=sum(model.x[j] for j in range(instance['n'])) == instance['p'])
 
-    for j in range(I.N):
-        model.cons.add(expr = sum(model.x[i,j] for i in range(I.N)) <= 1)
+    model.con2 = ConstraintList()
+    for i in range(instance['m']):
+        model.con2.add(sum(model.y[i, j] for j in range(instance['n'])) == 1)
 
-    for i in range(I.N):
-        for j in range(I.N):
-            model.cons.add(expr = model.y[i] >= model.x[i,j])
+    model.con3 = ConstraintList()
+    for i in range(instance['m']):
+        for j in range(instance['n']):
+            model.con3.add(model.y[i, j] - model.x[j] <= 0)
 
-    model.cons.add(expr = sum(model.y[i] for i in range(I.N)) == I.p)
+    model.con4 = ConstraintList()
+    for j in range(instance['n']):
+        model.con4.add(sum((instance['dem'][i] * model.y[i, j]) for i in range(instance['m'])) <= instance['q'] * model.x[j])
+    return model
 
-    for i in range(I.N):
-        model.cons.add(expr = sum(I.dem[j] * model.x[i,j] for j in range(I.N)) <= I.cap * model.y[i])
-
-    model.cons.add(expr = sum(model.x[i,j] for i in range(I.N) for j in range(I.N)) == I.N - model.M)
-
+if __name__ == '__main__':
+    instance = readInstance('C://Users//User//Downloads//P-Medianas-Capacitado-main//P-Medianas-Capacitado-main//instances//AAD_PMEDcap_100_20.txt')
+    #instancePrint(instance)
+    model = modelConstruction(instance)
     solver = SolverFactory('glpk')
-    solver.options['tmlim'] = 3600
-    results = solver.solve(model)
-    return model.obj.expr(), results, model
+    solver.options['tmlim'] = 3600  # Tempo limite de 1 hora
+    result = solver.solve(model)
 
-
-def check_coverage():
-    regions = ['grande_florianopolis', 'norte', 'serrana', 'alto_vale', 'sul', 'oeste', 'all']
-    for region in regions:
-        print('='*10, region, '='*10)
-        I = Instance(f'../instances/sc_{region}.txt')
-        value, results, model = formulation(I)
-        print(region, number_uncovered(I, model), f'({results.solver.termination_condition})', value)
-
-#check_coverage()
-#exit()
-
-I = Instance(sys.argv[1])
-value, results, model = formulation(I)
-print(value)
-solution(I, model)
-if results.solver.termination_condition != TerminationCondition.optimal: print(results.solver.termination_condition)
-#print(results.solver.status)
+    print(result)
+    print("Valor da Função Objetivo: ", model.obj())
+    print("Medianas escolhidas: ", [j for j in range(instance['n']) if model.x[j].value == 1])
+    print("Mediana para cada vértice: ",
+          [[j for j in range(instance['n']) if model.y[i, j].value == 1] for i in range(instance['m'])])
