@@ -1,0 +1,11 @@
+### Parameter file for the cucas problem
+# name		    switch          type    values
+alpha           "--alpha "	r       (0, 1)
+beta            "--beta "	r       (0, 1)
+d1            "--d1 "	r       (0, 1)
+d2            "--d2 "	r       (0, 1)
+restart            " "	c       (--restart, " ")
+restart_percent            "--restart_percent "	r       (0, 1)
+destruction            "--destruction "	c       ("guided", "random")
+ls            " "	c       (--ls, "")
+acceptance            "--acceptance "	c       ("current", "incumbent")
