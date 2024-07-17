@@ -1,9 +1,9 @@
 from instance import Instance
 from solution import Solution
 from constructive import random_solution, construction, random_destruction, guided_destruction
-from ls import local_search, first_improvement
-import random
+from ls import local_search
 import argparse
+import timeit
 
 def setup():
     global MAX_ITERATIONS, ALPHA, BETA, D1, D2, I, RESTART, RESTART_PERCENT, DESTRUCTION, LS, ACCEPTANCE
@@ -27,6 +27,7 @@ def iterated_greedy():
     S = random_solution(I)
     incumbent = Solution(I, S)
     incumbent_value = incumbent.complete_obj()
+    start = timeit.default_timer()
 
     no_improving_iterations = 0
 
@@ -54,9 +55,23 @@ def iterated_greedy():
             incumbent = Solution(I, S_new)
             incumbent_value = S_new_value
             no_improving_iterations = 0
+            current = timeit.default_timer()
+            timetobest = current - start
+            print(incumbent_value, timetobest)
+
+        # Time limit to solve sc_all instance
+        current = timeit.default_timer()
+        current_time = current - start
+        if current_time > 3600: break
+        # ---
 
         S = accept(S_new, incumbent, S_value, incumbent_value)
+
+    current = timeit.default_timer()
+    totaltime = current - start
+    print(incumbent_value, totaltime)
     print(incumbent)
+
 def main():
     setup()
     iterated_greedy()
