@@ -8,13 +8,12 @@ import random
 configuration_id = sys.argv[1]
 instance_id = sys.argv[2]
 seed = sys.argv[3]
-instance = sys.argv[4]
-conf_params = ' '.join(sys.argv[5:])
+instance = ' '.join(sys.argv[4:7])
+conf_params = ' '.join(sys.argv[7:])
 
 # Create execution command
-fixed_params = ''
-
-command = f'python3 ./src/ig.py --instance {instance} ----max_iterations 1000 {conf_params}'
+fixed_params = '--max_iterations 1000'
+command = f'python3 ./src/ig.py --instance {instance} {fixed_params} {conf_params}'
 
 # Define the stdout and stderr files
 r = str(random.randint(1, 999999))
@@ -40,7 +39,7 @@ if not os.path.isfile(out_file):
 
 # Get result and print it
 result = open(out_file).readlines()[-1]
-result = float(result.replace('\n', ''))
+result = int(result.replace('\n', ''))
 print(result)
 
 # Clean files and exit
