@@ -5,7 +5,7 @@ from ls import local_search
 import argparse
 import timeit
 
-def setup(instance_path):
+def setup():
     global MAX_ITERATIONS, ALPHA, BETA, D1, D2, I, RESTART, RESTART_PERCENT, DESTRUCTION, LS, ACCEPTANCE
     MAX_ITERATIONS = args.max_iterations
     ALPHA = args.alpha
@@ -17,7 +17,7 @@ def setup(instance_path):
     DESTRUCTION = args.destruction
     LS = args.ls
     ACCEPTANCE = args.acceptance
-    I = Instance(instance_path)
+    I = Instance(args.instance)
 
 def accept(S_new, incumbent, S_new_value, incumbent_value):
     if   ACCEPTANCE == 'incumbent': return incumbent
@@ -57,7 +57,7 @@ def iterated_greedy():
             no_improving_iterations = 0
             current = timeit.default_timer()
             timetobest = current - start
-            print(incumbent_value, timetobest)
+
 
         # Time limit to solve sc_all instance
         current = timeit.default_timer()
@@ -69,33 +69,12 @@ def iterated_greedy():
 
     current = timeit.default_timer()
     totaltime = current - start
-    print(incumbent_value, totaltime)
-    print(incumbent)
-
-    def salvar_dados(incumbent):
-        with open('Results_AAD_PMEDcap.txt', 'a') as f:
-            f.write("Tempo exec.: " + f"{totaltime}\n")
-            f.write(f"{incumbent}\n")
-            f.write("\n")
-
-    salvar_dados(incumbent)
-    print(incumbent)
+    print(incumbent_value)
 
 
 def main():
-    instance_paths = [
-        "C://Users//User//OneDrive//Documentos//respositorio//P-Medianas-Capacitado//instances//AAD_PMEDcap_25_5.txt",
-        "C://Users//User//OneDrive//Documentos//respositorio//P-Medianas-Capacitado//instances//AAD_PMEDcap_49_9.txt",
-        "C://Users//User//OneDrive//Documentos//respositorio//P-Medianas-Capacitado//instances//AAD_PMEDcap_80_16.txt",
-        "C://Users//User//OneDrive//Documentos//respositorio//P-Medianas-Capacitado//instances//AAD_PMEDcap_90_18.txt",
-        "C://Users//User//OneDrive//Documentos//respositorio//P-Medianas-Capacitado//instances//AAD_PMEDcap_100_20.txt",
-
-    ]
-
-    for instance_path in instance_paths:
-        for i in range(10):
-            setup(instance_path)
-            iterated_greedy()
+    setup()
+    iterated_greedy()
 
 if __name__ == "__main__":
     global args
