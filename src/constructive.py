@@ -23,7 +23,6 @@ def random_solution(I, S = None):
 #Calcula a distância de cada localidade para todos os outros e escolhe uma localidade através de estratégia semi-gulosa (aleatória baseada em ponderação por alpha).
 def select_location(I, S, alpha):
     total_dist = {}
-
     # Semi-greedy selection
     locations_distances = []
     for location in range(I.N):
@@ -34,7 +33,15 @@ def select_location(I, S, alpha):
     locations_distances.sort(key = lambda x: x[1])
 
     amount = max(ceil(len(locations_distances) * alpha), 1)
-    index = randint(0, amount - 1)
+
+    to_stop = False
+    while not to_stop:
+        index = randint(0, amount - 1)
+        if S.y[locations_distances[index][0]] != 0:
+            locations_distances.remove(locations_distances[index])
+        else:
+            to_stop = True
+
     return locations_distances[index][0]
 
 #Seleciona possíveis locais a serem cobertos pelo p, utilizando uma estratégia semi-gulosa controlada pelo parâmetro "beta"
@@ -58,11 +65,12 @@ def select_locations_to_cover(I, S, location_covering, beta):
 def construction(I, S = None, alpha = 0.5, beta = 0.5):
     if S is None:
         S = Solution(I)
-    
+
     n_equip = I.p - sum(S.y)
 
     while n_equip > 0:
         location = select_location(I, S, alpha)
+        #print(location)
         if S.add_equipment(location):
             n_equip -= 1
 
