@@ -31,11 +31,10 @@ def select_location(I, S, alpha):
             total_dist += I.distance[location][loc]
         locations_distances.append((location, total_dist))
     locations_distances.sort(key = lambda x: x[1])
-
-    amount = max(ceil(len(locations_distances) * alpha), 1)
-
+    
     to_stop = False
     while not to_stop:
+        amount = max(ceil(len(locations_distances) * alpha), 1)
         index = randint(0, amount - 1)
         if S.y[locations_distances[index][0]] != 0:
             locations_distances.remove(locations_distances[index])
