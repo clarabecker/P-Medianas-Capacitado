@@ -1,6 +1,6 @@
 parameterFile = "./parameters.txt"
 trainInstancesDir = "./instances"
-maxExperiments = 1000
+maxExperiments = 300
 digits = 2
 targetRunner = "./target-runner"
 sampleInstances = TRUE
