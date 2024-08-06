@@ -12,9 +12,9 @@ def gerar_figura(x_matriz, y_matriz, equipamentos, coberturas):
 
     fig, ax = plt.subplots(figsize=(8, 4))
 
-    rect1 = Rectangle((1, 6.8), 1.2, 3.3, linewidth=1, edgecolor='black', facecolor='lightgrey', alpha=0.5)
-    rect2 = Rectangle((1, 4.5), 3.1, 1.8, linewidth=1, edgecolor='black', facecolor='lightgrey', alpha=0.5)
-    rect3 = Rectangle((4.5, 2.8), 4.3, 4.5, linewidth=1, edgecolor='none', facecolor='lightgrey', alpha=0.5)
+    rect1 = Rectangle((0.9, 6.8), 1.2, 3.5, linewidth=1, edgecolor='black', facecolor='#FFCCCB', alpha=0.5)
+    rect2 = Rectangle((0.9, 4.5), 3.2, 1.8, linewidth=1, edgecolor='black', facecolor='#FFCCCB', alpha=0.5)
+    rect3 = Rectangle((4.5, 2.8), 4.3, 4.5, linewidth=1, edgecolor='none', facecolor='#D3F9D8', alpha=0.5)
     ax.add_patch(rect1)
     ax.add_patch(rect2)
     ax.add_patch(rect3)
@@ -73,9 +73,9 @@ if __name__ == '__main__':
     #coberturas = [1, 1, 1, 3, 9, 10, 1, 12, 9, 9, 10, 10, 12, 12, 9, 10, 21, 18, 18, 18, 21, 21, 21, 18, 18]
 
     #Solução ótima para a instância 49_9
-    #rect1 = Rectangle((1, 4.9), 1.1, 2.1, linewidth=1, edgecolor='black', facecolor='lightgrey', alpha=0.5)
-    #rect2 = Rectangle((1, 3.2), 2.2, 1.3, linewidth=1, edgecolor='black', facecolor='lightgrey', alpha=0.5)
-    #rect3 = Rectangle((3.5, 2.1), 2.6, 3.3, linewidth=1, edgecolor='none', facecolor='lightgrey', alpha=0.5)
+    #rect1 = Rectangle((0.9, 4.9), 1.2, 2.3, linewidth=1, edgecolor='black', facecolor='#FFCCCB', alpha=0.5)
+    #rect2 = Rectangle((0.9, 3.2), 2.2, 1.3, linewidth=1, edgecolor='black', facecolor='#FFCCCB', alpha=0.5)
+    #rect3 = Rectangle((3.5, 2.1), 2.6, 3.3, linewidth=1, edgecolor='none', facecolor='#D3F9D8', alpha=0.5)
     #x_matriz = 7
     #y_matriz = 7
     #equipamentos = [0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
