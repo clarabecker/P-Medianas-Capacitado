@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.patches import Rectangle
 
 def gerar_figura(x_matriz, y_matriz, equipamentos, coberturas):
     coberturas_incrementadas = [num + 1 for num in coberturas]
@@ -11,13 +12,20 @@ def gerar_figura(x_matriz, y_matriz, equipamentos, coberturas):
 
     fig, ax = plt.subplots(figsize=(8, 4))
 
+    rect1 = Rectangle((1, 6.8), 1.2, 3.3, linewidth=1, edgecolor='black', facecolor='lightgrey', alpha=0.5)
+    rect2 = Rectangle((1, 4.5), 3.1, 1.8, linewidth=1, edgecolor='black', facecolor='lightgrey', alpha=0.5)
+    rect3 = Rectangle((4.5, 2.8), 4.3, 4.5, linewidth=1, edgecolor='none', facecolor='lightgrey', alpha=0.5)
+    ax.add_patch(rect1)
+    ax.add_patch(rect2)
+    ax.add_patch(rect3)
+
     # Plotar clientes
     for idx, (cliente, (x, y)) in enumerate(coords_clientes.items()):
         if idx == 0:
             ax.scatter(x, y, s=20, c='blue', label='Cliente')
         else:
             ax.scatter(x, y, s=20, c='blue')
-        #ax.text(x, y, f' {cliente}', fontsize=12)
+        # ax.text(x, y, f' {cliente}', fontsize=12)
 
     # Plotar locais
     for idx, (local, (x, y)) in enumerate(coords_locais.items()):
@@ -65,6 +73,9 @@ if __name__ == '__main__':
     #coberturas = [1, 1, 1, 3, 9, 10, 1, 12, 9, 9, 10, 10, 12, 12, 9, 10, 21, 18, 18, 18, 21, 21, 21, 18, 18]
 
     #Solução ótima para a instância 49_9
+    #rect1 = Rectangle((1, 4.9), 1.1, 2.1, linewidth=1, edgecolor='black', facecolor='lightgrey', alpha=0.5)
+    #rect2 = Rectangle((1, 3.2), 2.2, 1.3, linewidth=1, edgecolor='black', facecolor='lightgrey', alpha=0.5)
+    #rect3 = Rectangle((3.5, 2.1), 2.6, 3.3, linewidth=1, edgecolor='none', facecolor='lightgrey', alpha=0.5)
     #x_matriz = 7
     #y_matriz = 7
     #equipamentos = [0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0]
@@ -101,16 +112,19 @@ if __name__ == '__main__':
     #coberturas = [2, 2, 2, 2, 2, 5, 6, 7, 8, 9, 12, 12, 12, 12, 12, 15, 16, 17, 18, 29, 22, 22, 22, 22, 22, 26, 26, 26, 29, 29, 41, 41, 33, 33, 33, 36, 36, 36, 48, 29, 41, 41, 41, 33, 54, 55, 36, 48, 48, 48, 51, 51, 51, 54, 54, 55, 55, 67, 48, 48, 51, 51, 72, 65, 65, 65, 67, 67, 67, 67, 72, 72, 72, 72, 72, 65, 86, 78, 78, 78, 82, 82, 82, 82, 86, 86, 86, 86, 78, 78]
 
     #Melhor solução encontrada para a instância 100_20
-    #x_matriz = 10
-    #y_matriz = 10
-    #equipamentos = [0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
-    #coberturas = [11, 11, 3, 3, 3, 5, 16, 17, 9, 9, 11, 11, 11, 3, 3, 5, 16, 17, 28, 28, 30, 11, 33, 33, 33, 35, 16, 28, 28, 28, 30, 30, 33, 33, 33, 35, 35, 47, 28, 28, 30, 51, 43, 43, 43, 35, 47, 47, 47, 47, 51, 51, 51, 43, 43, 65, 47, 47, 68, 68, 51, 51, 72, 72, 65, 65, 65, 68, 68, 68, 72, 72, 72, 72, 72, 77, 77, 77, 68, 68, 91, 91, 72, 85, 85, 85, 85, 88, 88, 88, 91, 91, 91, 91, 85, 85, 85, 88, 88, 88]
-
-    #Melhor solução encontrada para a instância 100_30
+    #rect1 = Rectangle((1, 6.8), 1.2, 3.3, linewidth=1, edgecolor='black', facecolor='lightgrey', alpha=0.5)
+    #rect2 = Rectangle((1, 4.5), 3.1, 1.8, linewidth=1, edgecolor='black', facecolor='lightgrey', alpha=0.5)
+    #rect3 = Rectangle((4.5, 2.8), 4.3, 4.5, linewidth=1, edgecolor='none', facecolor='lightgrey', alpha=0.5)
     x_matriz = 10
     y_matriz = 10
-    equipamentos = [0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0]
-    coberturas = [11, 11, 3, 3, 3, 5, 6, 7, 8, 9, 11, 11, 11, 23, 11, 15, 16, 17, 18, 29, 21, 21, 21, 23, 23, 26, 26, 26, 29, 29, 40, 21, 33, 33, 33, 37, 37, 37, 37, 29, 40, 40, 40, 53, 54, 46, 46, 46, 58, 58, 40, 61, 53, 53, 54, 54, 46, 58, 58, 58, 61, 61, 61, 63, 63, 63, 76, 58, 58, 79, 61, 61, 61, 63, 84, 76, 76, 76, 79, 79, 81, 81, 81, 84, 84, 84, 76, 97, 97, 79, 81, 81, 92, 92, 84, 97, 97, 97, 97, 97]
+    equipamentos = [0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+    coberturas = [11, 11, 3, 3, 3, 5, 16, 17, 9, 9, 11, 11, 11, 3, 3, 5, 16, 17, 28, 28, 30, 11, 33, 33, 33, 35, 16, 28, 28, 28, 30, 30, 33, 33, 33, 35, 35, 47, 28, 28, 30, 51, 43, 43, 43, 35, 47, 47, 47, 47, 51, 51, 51, 43, 43, 65, 47, 47, 68, 68, 51, 51, 72, 72, 65, 65, 65, 68, 68, 68, 72, 72, 72, 72, 72, 77, 77, 77, 68, 68, 91, 91, 72, 85, 85, 85, 85, 88, 88, 88, 91, 91, 91, 91, 85, 85, 85, 88, 88, 88]
+
+    #Melhor solução encontrada para a instância 100_30
+    #x_matriz = 10
+    #y_matriz = 10
+    #equipamentos = [0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0]
+    #coberturas = [11, 11, 3, 3, 3, 5, 6, 7, 8, 9, 11, 11, 11, 23, 11, 15, 16, 17, 18, 29, 21, 21, 21, 23, 23, 26, 26, 26, 29, 29, 40, 21, 33, 33, 33, 37, 37, 37, 37, 29, 40, 40, 40, 53, 54, 46, 46, 46, 58, 58, 40, 61, 53, 53, 54, 54, 46, 58, 58, 58, 61, 61, 61, 63, 63, 63, 76, 58, 58, 79, 61, 61, 61, 63, 84, 76, 76, 76, 79, 79, 81, 81, 81, 84, 84, 84, 76, 97, 97, 79, 81, 81, 92, 92, 84, 97, 97, 97, 97, 97]
     
     gerar_figura(x_matriz, y_matriz, equipamentos, coberturas)
 
